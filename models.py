@@ -173,5 +173,5 @@ class SegNet(nn.Module):
 
 if __name__ == '__main__':
     model = SegNet().to(device)
-
-    summary(model, (3, imsize, imsize))
+    print(model)
+    #summary(model, (3, imsize, imsize))

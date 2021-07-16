@@ -4,14 +4,14 @@ import random
 import cv2 as cv
 import numpy as np
 import torch
-from scipy.misc import imread, imresize, imsave
+from imageio import imread, imsave
 
 from config import device, save_folder, imsize
 from utils import ensure_folder
 
 
 def main():
-    checkpoint = '{}/BEST_checkpoint.tar'.format(save_folder)  # model checkpoint
+    checkpoint = '{}/checkpoint_0_0.093.tar'.format(save_folder)  # model checkpoint
     print('checkpoint: ' + str(checkpoint))
     # Load model
     checkpoint = torch.load(checkpoint)
@@ -31,7 +31,7 @@ def main():
     for i, path in enumerate(samples):
         # Read images
         img = imread(path)
-        img = imresize(img, (imsize, imsize))
+        img = cv.resize(img, (imsize, imsize))
         imsave('images/{}_image.png'.format(i), img)
 
         img = img.transpose(2, 0, 1)
@@ -40,7 +40,7 @@ def main():
         img = torch.FloatTensor(img / 255.)
         imgs[i] = img
 
-    imgs = torch.tensor(imgs)
+    #imgs = torch.tensor(imgs)
 
     with torch.no_grad():
         preds = model(imgs)
