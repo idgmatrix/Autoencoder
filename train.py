@@ -140,7 +140,7 @@ def main():
 
         # One epoch's validation
         val_loss = valid(val_loader, model)
-        print('\n * LOSS - {loss:.3f}\n'.format(loss=val_loss))
+        print('\n * LOSS - {loss:.4f}\n'.format(loss=val_loss))
 
         # Check if there was an improvement
         is_best = val_loss < best_loss

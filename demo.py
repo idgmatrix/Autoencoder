@@ -11,7 +11,7 @@ from utils import ensure_folder
 
 
 def main():
-    checkpoint = '{}/checkpoint_0_0.093.tar'.format(save_folder)  # model checkpoint
+    checkpoint = '{}/BEST_checkpoint.tar'.format(save_folder)  # model checkpoint
     print('checkpoint: ' + str(checkpoint))
     # Load model
     checkpoint = torch.load(checkpoint)
@@ -32,7 +32,7 @@ def main():
         # Read images
         img = imread(path)
         img = cv.resize(img, (imsize, imsize))
-        imsave('images/{}_image.png'.format(i), img)
+        imsave('images/{}_image.png'.format(i+10), img)
 
         img = img.transpose(2, 0, 1)
         assert img.shape == (3, imsize, imsize)
@@ -53,7 +53,7 @@ def main():
         out = np.clip(out, 0, 255)
         out = out.astype(np.uint8)
         out = cv.cvtColor(out, cv.COLOR_RGB2BGR)
-        cv.imwrite('images/{}_out.png'.format(i), out)
+        cv.imwrite('images/{}_out.png'.format(i+10), out)
 
 
 if __name__ == '__main__':

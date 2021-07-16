@@ -9,7 +9,7 @@ from config import imsize
 
 def load_data(split):
     # (num_samples, 320, 320, 4)
-    num_samples = 8144
+    num_samples = 10000
     train_split = 0.8
     num_train = int(round(num_samples * train_split))
     num_valid = num_samples - num_train
