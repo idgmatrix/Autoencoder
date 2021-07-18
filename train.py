@@ -6,6 +6,7 @@ from torch.utils.data import DataLoader
 
 from data_gen import VaeDataset
 from models import SegNet
+from config import save_folder
 from utils import *
 
 
@@ -109,9 +110,16 @@ def main():
                               pin_memory=True, drop_last=True)
     val_loader = DataLoader(dataset=VaeDataset('valid'), batch_size=batch_size, shuffle=False,
                             pin_memory=True, drop_last=True)
+
+    checkpoint = '{}/BEST_checkpoint.tar'.format(save_folder)  # model checkpoint
+    print('checkpoint: ' + str(checkpoint))
+    # Load model
+    checkpoint = torch.load(checkpoint)
+    model = checkpoint['model']
+
     # Create SegNet model
-    label_nbr = 3
-    model = SegNet(label_nbr)
+    #label_nbr = 3
+    #model = SegNet(label_nbr)
     if torch.cuda.device_count() > 1:
         print("Let's use", torch.cuda.device_count(), "GPUs!")
         # dim = 0 [40, xxx] -> [10, ...], [10, ...], [10, ...], [10, ...] on 4 GPUs
